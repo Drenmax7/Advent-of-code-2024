@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 # instances
 /Advent of code 2024/instance/j*.txt
+/Advent of code 2024/j14-2/images.txt
