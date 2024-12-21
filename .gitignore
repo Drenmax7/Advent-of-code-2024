@@ -363,5 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # instances
-*.txt
-/Advent of code 2024/instance/j12.txt
+j*.txt
+!j*.txt (vide)
