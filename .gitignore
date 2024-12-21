@@ -363,5 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # instances
-j*.txt
-!j*.txt (vide)
+.txt
