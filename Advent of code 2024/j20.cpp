@@ -123,6 +123,72 @@ string Jour20::part2() {
 	string retourFonction = "";
 	long long resultat = 0;
 
+	vector<int> end, start;
+	for (int i = 0; i < instance.size(); i++) {
+		for (int j = 0; j < instance[0].size(); j++) {
+			if (instance[i][j] == 'S') {
+				start = { i,j };
+			}
+			if (instance[i][j] == 'E') {
+				end = { i,j };
+			}
+		}
+	}
+	vector<vector<int>> path = { start };
+
+	vector<int> direction = { 1,0 };
+	bool fini = false;
+	while (!fini) {
+		vector<int> point = path.back();
+
+		for (int i = 0; i < 4; i++) {
+			int temp = direction[0];
+			direction[0] = direction[1];
+			direction[1] = -temp;
+
+			if (point[0] + direction[0] < 0 || point[0] + direction[0] >= instance.size() || point[1] + direction[1] < 0 || point[1] + direction[1] >= instance[0].size()) {
+				continue;
+			}
+
+
+			if (instance[point[0] + direction[0]][point[1] + direction[1]] == '#') {
+				continue;
+			}
+
+			if (path.size() > 1 && point[0] + direction[0] == path[path.size() - 2][0] &&
+				point[1] + direction[1] == path[path.size() - 2][1]) {
+				continue;
+			}
+
+			if (point[0] + direction[0] == end[0] && point[1] + direction[1] == end[1]) {
+				fini = true;
+			}
+
+			path.push_back({ point[0] + direction[0], point[1] + direction[1] });
+			break;
+		}
+	}
+
+	//vector<int> gain(10000, 0);
+	for (int co = 0; co < path.size(); co++) {
+		int x1 = path[co][1];
+		int y1 = path[co][0];
+		for (int cmpr = co; cmpr < path.size(); cmpr++) {
+			int x2 = path[cmpr][1];
+			int y2 = path[cmpr][0];
+			int distance = abs(x2 - x1) + abs(y2 - y1);
+			if (distance <= 20 && cmpr - co - distance >= 100) {
+				//gain[cmpr - co-distance]++;
+				resultat++;
+			}
+		}
+	}
+
+	/*for (int i = 0; i < gain.size(); i++) {
+		if (gain[i]) {
+			cout << i << " : " << gain[i] << endl;
+		}
+	}*/
 
 
 	retourFonction = to_string(resultat);
